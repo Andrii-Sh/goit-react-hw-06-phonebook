@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contactsSlice';
-// import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { getContacts } from '../../redux/selectors';
 import {
   Label,
   ContactInputForm,
@@ -16,10 +17,18 @@ const initialValues = {
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
   const handleSubmit = (values, { resetForm }) => {
-    // onSubmit(values);
-    // console.log(values);
+    if (
+      contacts.find(
+        item => item.name.toLowerCase() === values.name.toLowerCase()
+      )
+    ) {
+      alert(`${values.name} is already in contacts.`);
+      return;
+    }
+
     dispatch(addContact(values));
     resetForm();
   };
@@ -55,7 +64,3 @@ export const ContactForm = () => {
     </Formik>
   );
 };
-
-// ContactForm.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };

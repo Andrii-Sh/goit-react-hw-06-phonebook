@@ -1,12 +1,9 @@
-// import { useSelector } from 'react-redux';
-// import { getContacts } from '../../redux/selectors';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { Contact } from '../Contact/Contact';
 import { ContactItem } from './ContactList.styled';
 
 export const ContactList = ({ contacts }) => {
-  // const contacts = useSelector(getContacts);
   return (
     <ul>
       {contacts.map(contact => {
@@ -17,7 +14,6 @@ export const ContactList = ({ contacts }) => {
               id={contact.id}
               name={contact.name}
               number={contact.number}
-              // onDeleteContact={onDeleteContact}
             />
           </ContactItem>
         );
@@ -34,5 +30,4 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ),
-  // onDeleteContact: PropTypes.func.isRequired,
 };
