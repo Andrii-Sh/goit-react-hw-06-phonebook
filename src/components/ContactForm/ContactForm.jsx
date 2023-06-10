@@ -1,4 +1,6 @@
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
+// import PropTypes from 'prop-types';
 import {
   Label,
   ContactInputForm,
@@ -12,9 +14,13 @@ const initialValues = {
   number: '',
 };
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (values, { resetForm }) => {
-    onSubmit(values);
+    // onSubmit(values);
+    // console.log(values);
+    dispatch(addContact(values));
     resetForm();
   };
 
@@ -50,6 +56,6 @@ export const ContactForm = ({ onSubmit }) => {
   );
 };
 
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+// ContactForm.propTypes = {
+//   onSubmit: PropTypes.func.isRequired,
+// };
