@@ -21,13 +21,7 @@ const contactsSlice = createSlice({
       },
     },
     deleteContact(state, action) {
-      //   const fff = state;
-      //   state.filter(contact => contact.id !== action.payload);
-      //   console.log(action.payload);
-      //   console.log(state);
-
-      const index = state.findIndex(contact => contact.id === action.payload);
-      state.splice(index, 1);
+      return state.filter(contact => contact.id !== action.payload);
     },
   },
 });
