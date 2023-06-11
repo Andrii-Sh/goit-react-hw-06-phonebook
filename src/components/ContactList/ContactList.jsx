@@ -1,12 +1,29 @@
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { getFilter, getContacts } from '../../redux/selectors';
 import { nanoid } from 'nanoid';
 import { Contact } from '../Contact/Contact';
 import { ContactItem } from './ContactList.styled';
 
-export const ContactList = ({ contacts }) => {
+export const ContactList = () => {
+  const filter = useSelector(getFilter);
+  const contacts = useSelector(getContacts);
+
+  const getFiltredContacts = () => {
+    const normalizedFilter = filter.toLowerCase();
+    if (filter === '') {
+      return contacts;
+    }
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  const filtredContacts = getFiltredContacts();
+
   return (
     <ul>
-      {contacts.map(contact => {
+      {filtredContacts.map(contact => {
         const lisiItemtId = nanoid();
         return (
           <ContactItem key={lisiItemtId}>
@@ -20,14 +37,4 @@ export const ContactList = ({ contacts }) => {
       })}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
 };
