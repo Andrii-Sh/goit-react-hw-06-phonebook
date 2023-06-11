@@ -36,7 +36,7 @@ export const App = () => {
       <ContactForm />
       <Subtitle>Contacts</Subtitle>
       <Filter value={filter} onChange={handleFilterChange} />
-      <ContactList contacts={filtredContacts} />
+      {filtredContacts && <ContactList contacts={filtredContacts} />}
     </Container>
   );
 };
